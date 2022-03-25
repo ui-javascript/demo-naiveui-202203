@@ -11,7 +11,7 @@
 
 ```
 // 真相
-defineEmits只能在setup里使用...
+defineEmits只能在<script setup>里使用...
 
 ===
 "@vue/compiler-sfc": "^3.2.31",
