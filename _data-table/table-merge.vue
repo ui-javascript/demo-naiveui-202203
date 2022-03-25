@@ -7,9 +7,10 @@
   />
 </template>
 
-<script>
-import { h, defineComponent } from 'vue'
+<script setup>
+import { h, defineEmits } from 'vue'
 import { NTag, NButton, useMessage } from 'naive-ui'
+const emit = defineEmits(["hello"])
 
 const createColumns = ({ sendMail }) => {
   return [
@@ -60,7 +61,9 @@ const createColumns = ({ sendMail }) => {
           NButton,
           {
             size: 'small',
-            onClick: () => sendMail(row)
+            onClick: () => {
+              sendMail(row)
+            }
           },
           { default: () => 'Send Email' }
         )
@@ -93,20 +96,19 @@ const createData = () => [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      data: createData(),
-      columns: createColumns({
-        sendMail (rowData) {
-          message.info('send mail to ' + rowData.name)
-        }
-      }),
-      pagination: {
-        pageSize: 10
-      }
-    }
+const message = useMessage()
+
+const data = createData()
+const columns = createColumns({
+  sendMail (rowData) {
+    // console.log(this)
+    emit("hello", '触发');
+    message.info('send mail to ' + rowData.name)
   }
 })
+
+const pagination = {
+  pageSize: 10
+}
+
 </script>

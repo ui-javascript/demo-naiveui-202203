@@ -9,7 +9,9 @@ const App = {
   <n-message-provider>
     <n-notification-provider>
       <n-dialog-provider>
-        <demo />
+        <demo 
+          @hello="hello"
+        />
       </n-dialog-provider>
     </n-notification-provider>
   </n-message-provider>
@@ -18,7 +20,15 @@ const App = {
   `,
   components: {
     Demo,
-  }
+  },
+  setup() {
+    function hello(msg) {
+      console.log("家祭无忘告乃翁 -- " + msg)
+    }
+    return {
+        hello
+    }
+  },
 }
 
 createApp(App).use(naive).mount("#app");
